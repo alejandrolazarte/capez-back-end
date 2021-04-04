@@ -29,7 +29,7 @@ namespace CG.WebApi.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<ActionResult<ResponseAuthentication>> Create([FromBody] SystemAccountApiModel systemAccountApiModel)
+        public async Task<ActionResult<AuthenticationResponse>> Create([FromBody] SystemAccountApiModel systemAccountApiModel)
         {
             var (result, _) = await _identityService.CreateUserAsync(systemAccountApiModel.Email,
                 systemAccountApiModel.Password);
@@ -45,7 +45,7 @@ namespace CG.WebApi.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<ActionResult<ResponseAuthentication>> Login([FromBody] SystemAccountApiModel systemAccountApiModel)
+        public async Task<ActionResult<AuthenticationResponse>> Login([FromBody] SystemAccountApiModel systemAccountApiModel)
         {
             var result = await _identityService.Login(systemAccountApiModel.Email,
                 systemAccountApiModel.Password);
@@ -59,7 +59,7 @@ namespace CG.WebApi.Controllers
             return Ok(response);
         }
 
-        private async Task<ResponseAuthentication> CreateResponseAuthentication(SystemAccountApiModel systemAccountApiModel)
+        private async Task<AuthenticationResponse> CreateResponseAuthentication(SystemAccountApiModel systemAccountApiModel)
         {
             var claims = new List<Claim>
             {
@@ -75,7 +75,7 @@ namespace CG.WebApi.Controllers
             var token = new JwtSecurityToken(issuer: null, audience: null, claims: claims, expires: expiration,
                 signingCredentials: credentials);
 
-            return new ResponseAuthentication
+            return new AuthenticationResponse
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration
