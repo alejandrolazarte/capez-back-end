@@ -39,7 +39,7 @@ namespace CG.WebApi.Controllers
                 return BadRequest(result.Errors);
             }
 
-            var response = await CreateResponseAuthentication(systemAccountApiModel);
+            var response = await CreateAuthenticationResponse(systemAccountApiModel);
             return Ok(response);
         }
 
@@ -52,14 +52,14 @@ namespace CG.WebApi.Controllers
 
             if (!result)
             {
-                return BadRequest("Login incorrect");
+                return BadRequest("Login incorrecto");
             }
 
-            var response = await CreateResponseAuthentication(systemAccountApiModel);
+            var response = await CreateAuthenticationResponse(systemAccountApiModel);
             return Ok(response);
         }
 
-        private async Task<AuthenticationResponse> CreateResponseAuthentication(SystemAccountApiModel systemAccountApiModel)
+        private async Task<AuthenticationResponse> CreateAuthenticationResponse(SystemAccountApiModel systemAccountApiModel)
         {
             var claims = new List<Claim>
             {
@@ -77,6 +77,7 @@ namespace CG.WebApi.Controllers
 
             return new AuthenticationResponse
             {
+                Email = systemAccountApiModel.Email,
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = expiration
             };
