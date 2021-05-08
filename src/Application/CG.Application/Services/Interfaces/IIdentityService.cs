@@ -12,5 +12,6 @@ namespace CG.Application.Services.Interfaces
         Task<IEnumerable<Claim>> GetClaimsAsync(string userName);
         
         Task<bool> Login(string userName, string password);
+        Task<IEnumerable<string>> GetRolesAsync(string userName);
     }
 }

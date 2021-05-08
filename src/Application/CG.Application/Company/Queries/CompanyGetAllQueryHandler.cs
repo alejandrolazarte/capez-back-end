@@ -23,8 +23,7 @@ namespace CG.Application.Company.Queries
 
         public async Task<PagedList<CompanyDto>> Handle(CompanyGetAllQuery request, CancellationToken cancellationToken)
         {
-            var (results, totalItems) = await _companyRpository.GetAllPaginated(request.PageNumber, 
-                request.PageSize);
+            var (results, totalItems) = await _companyRpository.GetAllPaginated(request.PageNumber, request.PageSize);
             
             var pagedListCompanyDto = new PagedList<CompanyDto>(
                 _mapper.Map<IEnumerable<CompanyDto>>(results),

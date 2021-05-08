@@ -1,4 +1,5 @@
 ﻿using CG.Domain.Entities;
+using CG.Domain.Entities.EntitiesBase;
 
 namespace CG.Domain.Repository
 {

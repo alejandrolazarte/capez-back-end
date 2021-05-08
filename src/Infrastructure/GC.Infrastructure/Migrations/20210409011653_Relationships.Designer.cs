@@ -4,14 +4,16 @@ using CG.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CG.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210409011653_Relationships")]
+    partial class Relationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,9 +177,6 @@ namespace CG.Infrastructure.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedDateAtUtc")
                         .HasColumnType("datetime2");
 
@@ -197,8 +196,6 @@ namespace CG.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Products");
                 });
@@ -213,9 +210,6 @@ namespace CG.Infrastructure.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedDateAtUtc")
                         .HasColumnType("datetime2");
 
@@ -236,8 +230,6 @@ namespace CG.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.ToTable("Services");
                 });
 
@@ -247,9 +239,6 @@ namespace CG.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDateAtUtc")
                         .HasColumnType("datetime2");
@@ -267,8 +256,6 @@ namespace CG.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Turns");
                 });
@@ -530,27 +517,6 @@ namespace CG.Infrastructure.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("CG.Domain.Entities.Product", b =>
-                {
-                    b.HasOne("CG.Domain.Entities.Company", null)
-                        .WithMany("Prodcuts")
-                        .HasForeignKey("CompanyId");
-                });
-
-            modelBuilder.Entity("CG.Domain.Entities.Service", b =>
-                {
-                    b.HasOne("CG.Domain.Entities.Company", null)
-                        .WithMany("Services")
-                        .HasForeignKey("CompanyId");
-                });
-
-            modelBuilder.Entity("CG.Domain.Entities.Turn", b =>
-                {
-                    b.HasOne("CG.Domain.Entities.Company", null)
-                        .WithMany("Turns")
-                        .HasForeignKey("CompanyId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -633,15 +599,6 @@ namespace CG.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Turn");
-                });
-
-            modelBuilder.Entity("CG.Domain.Entities.Company", b =>
-                {
-                    b.Navigation("Prodcuts");
-
-                    b.Navigation("Services");
-
-                    b.Navigation("Turns");
                 });
 
             modelBuilder.Entity("CG.Domain.Entities.Product", b =>

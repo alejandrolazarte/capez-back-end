@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CG.Domain.Entities
+namespace CG.Domain.Entities.EntitiesBase
 {
     public abstract class EntityBase
     {

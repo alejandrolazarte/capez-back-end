@@ -42,5 +42,11 @@ namespace CG.Infrastructure.Identity
             var user = await _userManager.FindByEmailAsync(userName);
             return await _userManager.GetClaimsAsync(user);
         }
+
+        public async Task<IEnumerable<string>> GetRolesAsync(string userName)
+        {
+            var user = await _userManager.FindByEmailAsync(userName);
+            return await _userManager.GetRolesAsync(user);
+        }
     }
 }

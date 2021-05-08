@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using CG.Domain.Entities;
+using CG.Domain.Entities.EntitiesBase;
 using CG.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,23 @@ namespace CG.Infrastructure.Persistence
         public DbSet<PersonPhoneNumber> PersonPhoneNumbers { get; set; }
 
         public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Client> Clients { get; set; }
+
+        public DbSet<Turn> Turns { get; set; }
+
+        public DbSet<Service> Services { get; set; }
+
+        public DbSet<Product> Products  { get; set; }
+
+        public DbSet<ReceipProduct> ReceipProducts { get; set; }
+
+        public DbSet<ReceipTurn> ReceipTurns { get; set; }
+
+        public DbSet<ReceipService> ReceipServices { get; set; }
+
+        public DbSet<Receipt> Receipts { get; set; }
+
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

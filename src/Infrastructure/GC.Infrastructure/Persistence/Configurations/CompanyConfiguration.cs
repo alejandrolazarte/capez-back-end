@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CG.Infrastructure.Persistence.Configurations
 {
-    public class CompanyConfiguration : ConfigurationBase<Company>
+    public class CompanyConfiguration : EntityConfigurationBase<Company>
     {
         public override void ConfigureEntity(EntityTypeBuilder<Company> builder)
         {

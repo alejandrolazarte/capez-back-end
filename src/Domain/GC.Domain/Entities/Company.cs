@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CG.Domain.Entities.EntitiesBase;
+using System;
+using System.Collections.Generic;
 
 namespace CG.Domain.Entities
 {
@@ -17,5 +19,11 @@ namespace CG.Domain.Entities
         public DateTime? DeletedDateAtUtc { get; set; }
 
         public DateTime? LastUpdateDateAtUtc { get; set; }
+
+        public ICollection<Product> Prodcuts { get; set; }
+
+        public ICollection<Service> Services { get; set; }
+
+        public ICollection<Turn> Turns { get; set; }
     }
 }

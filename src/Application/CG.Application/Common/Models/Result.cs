@@ -5,24 +5,30 @@ namespace CG.Application.Common.Models
 {
     public class Result
     {
-        internal Result(bool succeeded, IEnumerable<string> errors)
+        internal Result(bool succeeded, params string[] errors)
         {
             Succeeded = succeeded;
-            Errors = errors.ToArray();
+            Errors = errors;
         }
 
-        public bool Succeeded { get; set; }
+        internal Result(bool succeeded)
+        {
+            Succeeded = succeeded;
+            Errors = System.Array.Empty<string>();
+        }
 
-        public string[] Errors { get; set; }
+        public bool Succeeded { get; }
+
+        public string[] Errors { get; }
 
         public static Result Success()
         {
-            return new(true, new string[] { });
+            return new(true);
         }
 
         public static Result Failure(IEnumerable<string> errors)
         {
-            return new(false, errors);
+            return new(false, errors.ToArray());
         }
     }
 }
